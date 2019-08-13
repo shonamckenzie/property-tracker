@@ -81,9 +81,10 @@ class Property
     sql = "SELECT * FROM property WHERE id = $1"
     values = [id_number]
     db.prepare("find", sql)
-    search_result = db.exec_prepared("find",values)
+    search_result = db.exec_prepared("find",values)[0]
     db.close()
-    return search_result.map { |result| Property.new(result) }
+    # return search_result.map { |result| Property.new(result) }
+    return Property.new(search_result)
   end
 
 end
